@@ -1,0 +1,22 @@
+schema_version = 1
+name = "shiplord-smoke"
+server = "hetzner-vm"
+template = "google-adk"
+runtime = "docker"
+
+[http]
+api_domain = "shiplord-smoke.lordpatil.com"
+frontend_origins = []
+container_port = 8080
+readiness_path = "/ready"
+
+[resources]
+memory_mb = 128
+
+[deploy]
+readiness_timeout_seconds = 20
+retain_successful_releases = 2
+
+[github]
+repository = "QueryPlanner/shiplord-smoke"
+deployment_branch = "main"
