@@ -36,7 +36,7 @@ jobs:
           DIGEST: ${{ steps.image.outputs.digest }}
         run: printf 'ghcr.io/queryplanner/shiplord-smoke@%s\n' "$DIGEST" | tee -a "$GITHUB_STEP_SUMMARY"
   tailnet:
-    if: ${{ vars.SHIPLORD_TS_CLIENT_ID != '' && vars.SHIPLORD_SERVER_HOST != '' }}
+    if: ${{ github.ref == 'refs/heads/main' && vars.SHIPLORD_TS_CLIENT_ID != '' && vars.SHIPLORD_SERVER_HOST != '' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:

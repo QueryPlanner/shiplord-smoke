@@ -7,5 +7,6 @@ container=$(docker run --detach --rm --cap-drop ALL \
 trap 'docker stop "$container" >/dev/null 2>&1 || true' EXIT
 endpoint=$(docker port "$container" 8080/tcp)
 test "$(curl --fail --silent --show-error --retry 8 --retry-delay 1 \
-  --retry-all-errors --max-time 3 "http://$endpoint/ready")" = ready
-test "$(curl --fail --silent --show-error "http://$endpoint/")" = "$(cat release.txt)"
+  --retry-all-errors --max-time 3 "http://$endpoint/")" = "$(cat release.txt)"
+test "$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+  "http://$endpoint/ready")" = 503

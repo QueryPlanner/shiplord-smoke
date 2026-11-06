@@ -6,7 +6,7 @@ from pathlib import Path
 class SmokeHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/ready":
-            self.respond(200, "ready")
+            self.respond(503, "deliberately unready")
         elif self.path == "/":
             self.respond(200, Path("/app/release.txt").read_text().strip())
         else:
